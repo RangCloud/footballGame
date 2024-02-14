@@ -1,0 +1,98 @@
+<!doctype html> 
+<html lang="ko"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>FootBall</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    var config = {
+        type: Phaser.AUTO,
+        width: 1200,
+        height: 600,
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    };
+
+    var game = new Phaser.Game(config);
+
+    function preload ()
+    {
+        this.load.image('backGround', 'kenney_sports-pack/Tilesheet/soccerGround.png');
+        this.load.image('leftPost', 'kenney_sports-pack/PNG/leftPost.png');
+        this.load.image('rightPost', 'kenney_sports-pack/PNG/rightPost.png');
+
+        this.load.image('redP1', 'kenney_sports-pack/PNG/Red/characterRed (1).png');
+    }
+
+    function create ()
+    {
+        let background = this.add.tileSprite(config.width / 2, config.height / 2, config.width, config.height, 'backGround');
+
+        // leftPost 이미지 추가 및 위치 조절
+        let leftPost = this.add.image(config.width / 15, config.height / 2, 'leftPost');
+        leftPost.setOrigin(1.25, 0.5); // 이미지의 중심을 기준으로 설정
+        leftPost.setDisplaySize(100, 200); // 골대 크기 설정
+
+        // rightPost 이미지 추가 및 위치 조절
+        let rightPost = this.add.image(config.width * 3 / 4, config.height / 2, 'rightPost');
+        rightPost.setOrigin(-2.5, 0.5); // 이미지의 중심을 기준으로 설정
+        rightPost.setDisplaySize(100, 200); 
+
+        this.add.image(50, 50, 'redP1');
+
+        // 그래픽스 객체 생성
+        let graphics = this.add.graphics();
+
+        // 그래픽스 객체를 사용하여 축구장 라인 그리기
+        graphics.lineStyle(2, 0xFFFFFF, 1);
+
+        // 상단 가로선
+        graphics.lineBetween(0, 1, config.width, 1);
+
+        // 하단 가로선
+        graphics.lineBetween(0, 599, config.width, 599);
+
+        // 왼쪽 세로선
+        graphics.lineBetween(55, 0, 55, config.height);
+
+        // 오른쪽 세로선
+        graphics.lineBetween(1150, 0, 1150, config.height);
+        
+        // 중앙 세로선
+        graphics.lineBetween(config.width / 2, 0, config.width / 2, config.height);
+
+        // 중앙 원
+        graphics.beginPath();
+        graphics.arc(config.width / 2, config.height / 2, 75, 0, 2 * Math.PI);
+        graphics.strokePath();
+
+        // 페널티 박스
+        graphics.strokeRect(55, 150, 120, 300);
+
+    }
+
+    function update ()
+    {
+    }
+
+</script>
+
+</body>
+</html>
