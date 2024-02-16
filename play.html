@@ -83,8 +83,21 @@
         graphics.arc(config.width / 2, config.height / 2, 75, 0, 2 * Math.PI);
         graphics.strokePath();
 
-        // 페널티 박스
+        // 왼쪽 페널티 박스
         graphics.strokeRect(55, 150, 120, 300);
+
+        // 왼쪽 페널티 반원
+        graphics.beginPath();
+        graphics.arc(55 + 120, config.height / 2, 75, -Math.PI / 2, Math.PI / 2, false);
+        graphics.strokePath();
+
+        // 오른쪽 페널티 박스
+        graphics.strokeRect(1035, 150, 115, 300);
+
+        // 오른쪽 페널티 반원
+        graphics.beginPath();
+        graphics.arc(1035 + 0, config.height / 2, 75, Math.PI / 2, -Math.PI / 2, false);
+        graphics.strokePath();
 
     }
 
